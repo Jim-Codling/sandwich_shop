@@ -13,22 +13,26 @@ class App extends StatelessWidget {
       title: 'Sandwich Shop App',
       home: Scaffold(
         appBar: AppBar(title: const Text('Sandwich Counter')),
-        body: const Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              OrderItemDisplay(3, 'BLT'),
-              OrderItemDisplay(5, 'Club'),
-              OrderItemDisplay(2, 'Vegetable'),
+              const OrderItemDisplay(5, 'Footlong'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    onPressed: () => print('Add button pressed!'),
+                    child: const Text('Add'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () => print('Remove button pressed!'),
+                    child: const Text('Remove'),
+                  ),
+                ],
+              ),
             ],
           ),
-          // child: Container(
-          //   color: Colors.blue[600],
-          //   width: 400.0,
-          //   height: 400.0,
-          //   alignment: Alignment.center,
-          //   child: OrderItemDisplay(5, 'Footlong'),
-          // ),
         ),
       ),
     );
