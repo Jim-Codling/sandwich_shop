@@ -32,6 +32,8 @@ class OrderScreen extends StatefulWidget {
 
 class _OrderScreenState extends State<OrderScreen> {
   int _quantity = 0;
+  bool _isFootlong = true;
+  String get _selectedSize => _isFootlong ? 'Footlong' : 'Six-inch';
 
   void _increaseQuantity() {
     if (_quantity < widget.maxQuantity) {
@@ -69,7 +71,7 @@ class _OrderScreenState extends State<OrderScreen> {
           children: <Widget>[
             OrderItemDisplay(
               _quantity,
-              'Footlong',
+              _selectedSize,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -90,6 +92,18 @@ class _OrderScreenState extends State<OrderScreen> {
                   ),
                   child: const Text('Remove'),
                 ),
+              ],
+            ),
+            // Size switch
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text('Six-inch'),
+                Switch(
+                  value: _isFootlong,
+                  onChanged: (value) => setState(() => _isFootlong = value),
+                ),
+                const Text('Footlong'),
               ],
             ),
           ],
