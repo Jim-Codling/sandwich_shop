@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+MaterialColor addcolour = Colors.red;
+MaterialColor remcolour = Colors.grey;
+
 void main() {
   runApp(const App());
 }
@@ -32,13 +35,25 @@ class _OrderScreenState extends State<OrderScreen> {
 
   void _increaseQuantity() {
     if (_quantity < widget.maxQuantity) {
+      addcolour = Colors.red;
+      remcolour = Colors.red;
       setState(() => _quantity++);
+    }
+    if (_quantity == widget.maxQuantity) {
+      addcolour = Colors.grey;
+      remcolour = Colors.red;
     }
   }
 
   void _decreaseQuantity() {
     if (_quantity > 0) {
+      remcolour = Colors.red;
+      addcolour = Colors.red;
       setState(() => _quantity--);
+    }
+    if (_quantity == 0) {
+      remcolour = Colors.grey;
+      addcolour = Colors.red;
     }
   }
 
@@ -61,10 +76,18 @@ class _OrderScreenState extends State<OrderScreen> {
               children: [
                 ElevatedButton(
                   onPressed: _increaseQuantity,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: addcolour,
+                    foregroundColor: Colors.white,
+                  ),
                   child: const Text('Add'),
                 ),
                 ElevatedButton(
                   onPressed: _decreaseQuantity,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: remcolour,
+                    foregroundColor: Colors.white,
+                  ),
                   child: const Text('Remove'),
                 ),
               ],
