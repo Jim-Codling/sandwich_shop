@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 class OrderRepository {
   int _quantity = 0;
   final int maxQuantity;
@@ -19,5 +21,15 @@ class OrderRepository {
     if (canDecrement) {
       _quantity--;
     }
+  }
+}
+
+class PricingRepository {
+  double _price = 0.0;
+
+  double get price => _price;
+
+  void setPrice(double unitPrice, int quantity) {
+    _price = unitPrice * quantity;
   }
 }
