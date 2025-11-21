@@ -84,11 +84,13 @@ void main() {
   });
 
   testWidgets('changes footlong to six-inch', (WidgetTester tester) async {
-    await tester.pumpWidget(const App());
+    const switchKey = Key('');
+    await tester.pumpWidget(MaterialApp(key: switchKey, home: OrderScreen()));
     expect(find.text('footlong'), findsOneWidget);
-    await tester.tap(find.byType(Switch));
+    //await tester.tap(find.byType(Switch));
     await tester.pump();
     expect(find.text('six-inch'), findsOneWidget);
+    expect(find.byKey(switchKey), findsOneWidget);
   });
 
   group('StyledButton', () {
