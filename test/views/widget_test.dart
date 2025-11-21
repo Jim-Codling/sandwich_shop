@@ -83,6 +83,14 @@ void main() {
     });
   });
 
+  testWidgets('changes footlong to six-inch', (WidgetTester tester) async {
+    await tester.pumpWidget(const App());
+    expect(find.text('footlong'), findsOneWidget);
+    await tester.tap(find.byType(Switch));
+    await tester.pump();
+    expect(find.text('six-inch'), findsOneWidget);
+  });
+
   group('StyledButton', () {
     testWidgets('renders with icon and label', (WidgetTester tester) async {
       const testButton = StyledButton(
