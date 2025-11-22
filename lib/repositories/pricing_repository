@@ -1,0 +1,9 @@
+class PricingRepository {
+  double _price = 0.0;
+
+  double get price => _price;
+
+  void setPrice(double unitPrice, int quantity) {
+    _price = unitPrice * quantity;
+  }
+}

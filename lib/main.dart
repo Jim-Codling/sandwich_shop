@@ -33,6 +33,7 @@ class OrderScreen extends StatefulWidget {
 
 class _OrderScreenState extends State<OrderScreen> {
   late final OrderRepository _orderRepository;
+  late final PricingRepository _PricingRepository;
   final TextEditingController _notesController = TextEditingController();
   bool _isFootlong = true;
   bool _isToasted = false;
@@ -42,6 +43,7 @@ class _OrderScreenState extends State<OrderScreen> {
   void initState() {
     super.initState();
     _orderRepository = OrderRepository(maxQuantity: widget.maxQuantity);
+    _PricingRepository = PricingRepository();
     _notesController.addListener(() {
       setState(() {});
     });
@@ -96,6 +98,12 @@ class _OrderScreenState extends State<OrderScreen> {
       sandwichType = 'six-inch';
     }
 
+    // update pricing each build using the repository
+    final double unitPrice = _isFootlong ? 11.0 : 7.0;
+    _PricingRepository.setPrice(unitPrice, _orderRepository.quantity);
+    final String priceDisplay =
+        '\$${_PricingRepository.price.toStringAsFixed(2)}';
+
     String noteForDisplay;
     if (_notesController.text.isEmpty) {
       noteForDisplay = 'No notes added.';
@@ -119,6 +127,11 @@ class _OrderScreenState extends State<OrderScreen> {
               itemType: sandwichType,
               breadType: _selectedBreadType,
               orderNote: noteForDisplay,
+            ),
+            const SizedBox(height: 20),
+            Text(
+              priceDisplay,
+              style: normalText,
             ),
             const SizedBox(height: 20),
             Row(
