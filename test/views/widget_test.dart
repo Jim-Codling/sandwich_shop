@@ -85,7 +85,8 @@ void main() {
 
   testWidgets('changes footlong to six-inch', (WidgetTester tester) async {
     const switchKey = Key('');
-    await tester.pumpWidget(MaterialApp(key: switchKey, home: OrderScreen()));
+    await tester
+        .pumpWidget(const MaterialApp(key: switchKey, home: OrderScreen()));
     expect(find.text('footlong'), findsOneWidget);
     //await tester.tap(find.byType(Switch));
     await tester.pump();

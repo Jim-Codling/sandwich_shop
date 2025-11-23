@@ -33,7 +33,7 @@ class OrderScreen extends StatefulWidget {
 
 class _OrderScreenState extends State<OrderScreen> {
   late final OrderRepository _orderRepository;
-  late final PricingRepository _PricingRepository;
+  late final PricingRepository _pricingRepository;
   final TextEditingController _notesController = TextEditingController();
   bool _isFootlong = true;
   bool _isToasted = false;
@@ -43,7 +43,7 @@ class _OrderScreenState extends State<OrderScreen> {
   void initState() {
     super.initState();
     _orderRepository = OrderRepository(maxQuantity: widget.maxQuantity);
-    _PricingRepository = PricingRepository();
+    _pricingRepository = PricingRepository();
     _notesController.addListener(() {
       setState(() {});
     });
@@ -100,9 +100,9 @@ class _OrderScreenState extends State<OrderScreen> {
 
     // update pricing each build using the repository
     final double unitPrice = _isFootlong ? 11.0 : 7.0;
-    _PricingRepository.setPrice(unitPrice, _orderRepository.quantity);
+    _pricingRepository.setPrice(unitPrice, _orderRepository.quantity);
     final String priceDisplay =
-        '\$${_PricingRepository.price.toStringAsFixed(2)}';
+        '\$${_pricingRepository.price.toStringAsFixed(2)}';
 
     String noteForDisplay;
     if (_notesController.text.isEmpty) {
